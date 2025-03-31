@@ -17,9 +17,9 @@ export interface NavGroup {
 
 export interface NavItem {
     title: string;
-    href: string;
+    href?: string;
     icon?: LucideIcon | null;
-    isActive?: boolean;
+    children?: NavItem[];
 }
 
 export interface SharedData {
@@ -40,3 +40,7 @@ export interface User {
     updated_at: string;
     [key: string]: unknown; // This allows for additional properties...
 }
+
+// Models
+export * from './models/Student';
+export * from './models/Course';

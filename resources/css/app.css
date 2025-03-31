@@ -157,3 +157,12 @@
         @apply bg-background text-foreground;
     }
 }
+
+[data-slot='collapsible-content'] {
+    overflow: hidden;
+    transition: height 200ms ease;
+}
+
+[data-slot='collapsible-trigger'] svg {
+    transition: transform 200ms ease;
+}

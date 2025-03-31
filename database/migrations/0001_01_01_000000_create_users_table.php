@@ -1,24 +1,23 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->rememberToken();
-            $table->timestamps();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->trails();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
@@ -35,11 +34,16 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
+
+        // Create the initial super admin
+        $user = User::create([
+            'name' => 'Super Admin',
+            'email' => 'superadmin@admin.com',
+            'password' => Hash::make('Abc123000!'),
+        ]);
+        $user->save();
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('users');
