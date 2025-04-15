@@ -1,6 +1,5 @@
 // CourseExamsTab.tsx
 import DataTable from '@/components/DataTable/DataTable';
-import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger } from '@/components/ui/select';
 import { router, useForm, usePage } from '@inertiajs/react';
 import { Column } from 'primereact/column';
@@ -12,7 +11,7 @@ export default function CourseExamsTab() {
         allExams: Exam[];
     }>().props;
 
-  const { delete: destroy } = useForm();
+    const { delete: destroy } = useForm();
 
     const addExam = (examId: string) => {
         router.post(`/course-exams/${course.id}/exams`, {
@@ -28,7 +27,7 @@ export default function CourseExamsTab() {
         <div className="space-y-4">
             <div className="flex items-center gap-4">
                 <Select onValueChange={addExam}>
-                    <SelectTrigger className="w-[300px]">
+                    <SelectTrigger className="md:w-[300px]">
                         <span className="text-muted-foreground">{allExams.length === 0 ? 'No available exams to add' : 'Add exam to course'}</span>
                     </SelectTrigger>
                     <SelectContent>
@@ -64,7 +63,7 @@ export default function CourseExamsTab() {
                 <Column
                     header="Actions"
                     body={(rowData) => (
-                        <div className="flex gap-2">
+                        <div className="flex justify-center gap-2">
                             <AddExamMarksDialog exam={rowData} />
                             {/* <Button variant="destructive" size="sm" onClick={() => removeExam(rowData.id)}>
                                 Remove

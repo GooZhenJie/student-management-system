@@ -20,7 +20,7 @@ type CreateCourseForm = {
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Course',
-        href: '/Course',
+        href: '/course',
     },
     {
         title: 'Create',

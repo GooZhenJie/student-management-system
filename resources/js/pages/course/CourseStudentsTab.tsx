@@ -3,6 +3,7 @@ import DataTable from '@/components/DataTable/DataTable';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger } from '@/components/ui/select';
 import { router, useForm, usePage } from '@inertiajs/react';
+import { Trash2 } from 'lucide-react';
 import { Column } from 'primereact/column';
 
 export default function CourseStudentsTab() {
@@ -26,7 +27,7 @@ export default function CourseStudentsTab() {
         <div className="space-y-4">
             <div className="flex items-center gap-4">
                 <Select onValueChange={addStudent}>
-                    <SelectTrigger className="w-[300px]">
+                    <SelectTrigger className="md:w-[300px]">
                         <span className="text-muted-foreground">
                             {allStudents.length === 0 ? 'No available students to add' : 'Add student to course'}
                         </span>
@@ -51,9 +52,12 @@ export default function CourseStudentsTab() {
                 <Column
                     header="Actions"
                     body={(rowData) => (
-                        <Button variant="destructive" size="sm" onClick={() => removeStudent(rowData.id)}>
-                            Remove
-                        </Button>
+                        <div className='flex justify-center'>
+                            <Button variant="destructive" size="sm" onClick={() => removeStudent(rowData.id)}>
+                                <Trash2 />
+                                <span className="sr-only md:not-sr-only">Remove</span>
+                            </Button>
+                        </div>
                     )}
                 ></Column>
             </DataTable>

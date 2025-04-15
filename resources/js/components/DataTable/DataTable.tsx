@@ -127,7 +127,7 @@ export default function DataTable({ model, value, children }: Props) {
         if (!hasAction) return <></>;
 
         return (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center justify-center gap-2">
                 {/* Edit Button */}
                 <Link href={`${model}/${data.id}/edit`} method="get">
                     <Button variant="outline" size="sm" className="gap-1">
@@ -192,13 +192,13 @@ export default function DataTable({ model, value, children }: Props) {
     };
 
     return (
-        <>
-            <div className="flex justify-end gap-2">
+        <div className="@container flex w-full flex-col gap-4">
+            <div className="flex items-center justify-end gap-2">
                 {hasAction && (
                     <Link href={route(`${model}.create`)}>
                         <Button variant={'outline'}>
                             <Plus />
-                            Create New
+                            <p className="sr-only md:not-sr-only">Create New</p>
                         </Button>
                     </Link>
                 )}
@@ -222,19 +222,25 @@ export default function DataTable({ model, value, children }: Props) {
                     </DropdownMenuContent>
                 </DropdownMenu>
             </div>
-            <BaseDataTable
-                ref={dataTableRef}
-                value={value}
-                tableStyle={{ fontSize: '0.875rem' }}
-                showGridlines
-                paginator
-                rows={10}
-                rowsPerPageOptions={[10, 25, 50, 100]}
-                size={'small'}
-            >
-                {children}
-                {hasAction && <Column header="Action" body={actions}></Column>}
-            </BaseDataTable>
-        </>
+            <div className="overflow-x-auto">
+                <BaseDataTable
+                    ref={dataTableRef}
+                    value={value}
+                    tableStyle={{
+                        fontSize: '0.875rem',
+                        borderCollapse: 'collapse',
+                        borderSpacing: 0,
+                    }}
+                    showGridlines
+                    paginator
+                    rows={10}
+                    rowsPerPageOptions={[10, 25, 50, 100]}
+                    size={'small'}
+                >
+                    {children}
+                    {hasAction && <Column header="Action" body={actions}></Column>}
+                </BaseDataTable>
+            </div>
+        </div>
     );
 }
